@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script>
+            function News1st(){
+                console.log("run News1st ...");
+                    fetch("http://localhost:4000/News/2")
+                    .then((res) => res.json())
+                    .then((res) => console.log(res))
+            }
+        </script>
+    </head>
+
+    <form
+        method="GET">
+        <input
+            type="button"
+            onclick="News1st()"
+            value="cilck"
+            />
+            
+    </form>
+    <span id="test"> test </span>
+</html>
