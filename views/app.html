@@ -1,23 +1,151 @@
 <html>
     <head>
-        <script>
-            function News1st(){
-                console.log("run News1st ...");
-                    fetch("http://localhost:4000/News/2")
-                    .then((res) => res.json())
-                    .then((res) => console.log(res))
-            }
-        </script>
-    </head>
+        <link rel="stylesheet" href="stylesheets/styles.css"/>
+        <link rel="stylesheet" href="stylesheets/modal.css"/>
+        <link rel="stylesheet" href="stylesheets/Top_menu.css"/>
 
-    <form
-        method="GET">
-        <input
-            type="button"
-            onclick="News1st()"
-            value="cilck"
-            />
-            
-    </form>
-    <span id="test"> test </span>
+        <script src="javascripts/containner.js"></script>
+        <script src="javascripts/fetch.js"></script>
+
+        <link rel="shortcut icon" href="#">
+    </head>
+    <br/>
+<body>
+<center>
+    <div class="TopMenu"> 
+        <div class="top-menu">
+    <!-- main page window -->
+        <form
+            method="POST"
+            onsubmit="return false"
+            >
+                <span style="font-size: 3vw; font-weight: lighter; color: white;">네이버 크롤링 사이트</span>
+                <br/><br/>
+                <div id="time">
+                    <input
+                        type="radio"
+                        name="time"
+                        value="1"
+                        checked/> 1차 ( 24시간 )
+                    <input
+                        type="radio"
+                        name="time"
+                        value="2"/> 2차 ( 6시간 )
+                    <input
+                        type="radio"
+                        name="time"
+                        value="3"/> 3차 ( 3시간 )
+                </div>
+    
+                <br/>
+    
+                <div class="keyWord_form">
+                    검색어 :
+                    <tr>
+                        <input
+                            class="keyword_input"
+                            type="text"
+                            id="keyword"
+                            placeholder="검색어를 입력해주세요."
+                        />
+                        <input
+                            class="getData_btn"
+                            type="button"
+                            onclick="getData()"
+                            value="cilck"
+                        />
+                    </tr><br/><br/>
+                </div>
+    
+                <div id="page_num_div">
+                    페이지
+                    <script>
+                        document.write("<input type='radio'name='1' id='page_num'value='1' checked/> 1")
+                        var n = 2;
+                        for(i=10; i<100; i=i+10){
+                            document.write("<input type='radio'name='1' id='page_num'value='",i+1,"'/> "+n+" ")
+                            n=n+1;
+                        }
+                    </script>
+                </div><br/>
+        </form>
+    <!-- End main page window --> 
+
+        </div> 
+    </div>
+
+    <div class="Top_btn">
+        <button class="Btn" onclick="Scroll_Top()">TOP</button><br/><br/>
+        <button class="M_Btn" onclick="modal()"> 문서 자동 </button><br/><br/>
+        <button class="Btn" onclick="onMenu()"> 검색 </button>
+    </div>
+</center>    
+<!-- Modal window -->
+<div class="modal hidden">
+    <div class="bg"></div>
+    <div class="modalBox Btn_font_black">
+        <button class="all_delete_btn" onclick="del_all()">전체삭제</button><br/><br/>
+            <div id="today"></div> <br/>
+            <div id="subject_1">
+                ① 공단 및 방폐장
+                <pre id="content_1"></pre>
+            </div>
+            <div id="subject_2">
+                ② 재검토위 및 사용후핵연료
+                <pre id="content_2"></pre>
+            </div>
+            <div id="subject_3">
+                ③ 에너지전환 및 원자력
+                <pre id="content_3"></pre>
+        </div>
+    </div>
+</div>
+<!-- End modal window -->
+
+<!-- viewTable -->
+<center>
+<table class="viewTable">
+    <script>
+        for(i=0; i<=9; i++){
+            document.write("<tr>")
+                document.write("<th>제목</th>")
+                document.write("<td style='font-weight: bold;' id='title"+i+"'></td>")
+                document.write("<th><button class='delete_btn' type='button' value='"+i+"' onclick='del_content("+i+")'>지우기</button></th>")
+            document.write("</tr>")
+
+            document.write("<tr>")
+                document.write("<th>언론사</th>")
+                document.write("<td id='company"+i+"'></td>")
+                document.write("<th><button class='st_num' id='1' type='button' value='"+i+"' onclick='add_content(this.id,"+i+")'>1</button><button class='st_num' id='2' type='button' value='url"+i+"' onclick='add_content(this.id,"+i+")'>2</button><button class='st_num' id='3' type='button' value='url"+i+"' onclick='add_content(this.id,"+i+")'>3</button></th>")
+            document.write("</tr>")
+
+            document.write("<tr>")
+                document.write("<th>url</th>")
+                document.write("<td id='url"+i+"'></td>")
+                document.write("<th><button class='link_btn' type='button' value='url"+i+"' onclick='url_link(this.value)'>URL 바로가기</button></th>")
+            document.write("</tr>")
+
+            document.write("<tr>")
+                document.write("<th>단축url</th>")
+                document.write("<td id='vola"+i+"_url'></td>")
+                document.write("<th><button class='link_btn' type='button' value='vola"+i+"_url' onclick='url_link(this.value)'>단축 URL 바로가기</button></th>")
+            document.write("<tr>")
+
+            document.write("<tr>")
+                document.write("<th>관련뉴스</th>")
+                document.write("<td id='sameNews"+i+"'></td>")
+                document.write("<td style='display:none' id='sameNewsUrl"+i+"'></td>")
+                document.write("<th><button class='link_btn' type='button' value='sameNewsUrl"+i+"' onclick='url_link(this.value)'>관련뉴스 바로가기</button></th>")
+            document.write("</tr>")
+
+            document.write("<tr>")
+                document.write("<td class='br'><br></td>")
+            document.write("</tr>")
+            }
+    </script>
+</talbe>
+
+</center>
+<!-- End viewTable -->
+</body>
 </html>

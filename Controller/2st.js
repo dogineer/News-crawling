@@ -2,20 +2,19 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const fs = require("fs");
 
-const keyWord = "원자력";
-const searchUrl = "https://search.naver.com/search.naver?where=news&query=" + keyWord + "&sm=tab_opt&sort=0&photo=0&field=0&pd=4&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3A1d&is_sug_officeid=0"
-console.log(searchUrl);
-
-const getNewList = async () => {
-try {
-    const url = "https://search.naver.com/search.naver?where=news&query=%EC%9B%90%EC%9E%90%EB%A0%A5&sm=tab_opt&sort=0&photo=0&field=0&pd=4&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3A1d&is_sug_officeid=0" 
-    console.log("get url run ...");
-    console.log("원자력 2차 검색 결과중 ...");
-    return await axios.get(url);
-} catch (error) {
-    console.error(error);
-    }
-};
+const getNewList = async (req, res) => {
+    try {
+        console.log("get url run ...");
+        let keyWord=req.body.keyword;
+        var enc = encodeURI(keyWord);
+        let searchUrl="https://search.naver.com/search.naver?where=news&query="+enc+"&sm=tab_opt&sort=0&photo=0&field=0&pd=12&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3A1d&is_sug_officeid=0"
+        console.log( "[",keyWord,"] 2차 검색 결과중 ...");
+        
+        return await axios.get(searchUrl);
+    } catch (error) {
+        console.error(error);
+        }
+    };
 
 const dataPath = "./newsList_2.json"
 

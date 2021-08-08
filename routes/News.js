@@ -1,74 +1,141 @@
 var express = require('express');
 var router = express.Router();
-const fs = require("fs");
-const cron = require("node-cron");
 const cors = require('cors');
+const axios = require("axios");
+const cheerio = require("cheerio");
 
 const app = express();
 app.use(cors());
 
-/* ========== < async get News > ==========*/
+router.post("/1",async(req,res)=> {
+    console.log("\n1차 라우터 포스트 : ",req.body.keyword);
+    console.log("\n1차 라우터 페이지 : ",req.body.page);
 
+    let getNewList = () => {
+        try {
+            console.log("get url run ...");
+            let keyWord=req.body.keyword;
+            let page=req.body.page;
+            var enc = encodeURI(keyWord);
+            let searchUrl="https://search.naver.com/search.naver?where=news&query="+enc+"&sm=tab_opt&sort=0&photo=0&field=0&pd=4&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so:r,p:1d,a:all&start="+page;
+            console.log( "[",keyWord,"] 1차 검색 결과중 ...");
 
-/* ========== < async get News > ==========*/
+            return axios.get(searchUrl);
+        } catch (error) {
+            console.error(error);
+            }
+    };
 
-/* ========== < rest apis > ========== */
-// post : "keyword"
+    getNewList()
+        .then(html => {
+            let ulList = [];
+            const $ = cheerio.load(html.data);
+            const $bodyList = $("ul.list_news").children("li")
+            $bodyList.each(function(i, elem) {
+            ulList[i] =
+                {
+                    title: $(this).find('.news_wrap .news_area a.news_tit').text(),
+                    url: $(this).find('.news_wrap .news_area a.news_tit').attr('href'),
+                    company : $(this).find('.news_wrap .news_area .news_info .info_group .press').text(),
+                    sameNews :  $(this).find('a.news_more').text(),
+                    sameNewsUrl :  $(this).find('a.news_more').attr('href'),
+                };
+            })
+            const data = ulList.filter(n => n.title);
+            return data;
+        })
+        .then(response => {
+            const News = JSON.stringify(response)
+            res.send(News)
+        })
 
-router.get("/1",async(req,res)=> {
-    const { get1stList } = require("../Controller/1st.js");
-
-    async function get1stAsync() {
-        const News_data = await get1stList();
-        console.log("News = ", News_data);
-        console.log(NewsJSON.text);
-    }
-
-    const NewsJSON = fs.readFile("./newsList_1.json");
-    res.send(NewsJSON);
 }) // end 1st
 
-router.get("/2",async(req,res)=> {
-    const { get2stList } = require("../Controller/2st.js");
+router.post("/2",async(req,res)=> {
+    console.log("\n2차 라우터 포스트 : ",req.body.keyword);
+    console.log("\n2차 라우터 페이지 : ",req.body.page);
 
-    async function get2stAsync() {
-        const News_data = await get2stList();
-        console.log("News = ", News_data);
-        console.log(NewsJSON.text);
-    }
-    cron.schedule("*/1 * * * *", async () => {
-        console.log("running a task every two minutes");
-        await get2stAsync();
-    }); // end 2st
+    let getNewList = () => {
+        try {
+            console.log("get url run ...");
+            let keyWord=req.body.keyword;
+            let page=req.body.page;
+            var enc = encodeURI(keyWord);
+            let searchUrl="https://search.naver.com/search.naver?where=news&query="+enc+"&sm=tab_opt&sort=0&photo=0&field=0&pd=12&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so:r,p:1d,a:all&start="+page;
+            console.log( "[",keyWord,"] 2차 검색 결과중 ...");
 
-    const NewsJSON = fs.readFileSync("./newsList_2.json");
-    res.send(NewsJSON);
+            return axios.get(searchUrl);
+        } catch (error) {
+
+            console.error(error);
+            }
+    };
+
+    getNewList()
+        .then(html => {
+            let ulList = [];
+            const $ = cheerio.load(html.data);
+            const $bodyList = $("ul.list_news").children("li")
+            $bodyList.each(function(i, elem) {
+            ulList[i] =
+                {
+                    title:      $(this).find('.news_wrap .news_area a.news_tit').text(),
+                    url:        $(this).find('.news_wrap .news_area a.news_tit').attr('href'),
+                    company :   $(this).find('.news_wrap .news_area .news_info .info_group a').text(),
+                    sameNews :  $(this).find('a.news_more').text(),
+                };
+            })
+            const data = ulList.filter(n => n.title);
+            return data;
+        })
+        .then(response => {
+            const News = JSON.stringify(response)
+            res.send(News)
+        })
 })  // end 2st
 
-router.get("/3",async(req,res)=> {
-    const { get3stList } = require("../Controller/3st.js");
+router.post("/3",async(req,res)=> {
+    console.log("\n3차 라우터 포스트 : ",req.body.keyword);
+    console.log("\n3차 라우터 페이지 : ",req.body.page);
 
-    async function get3stAsync() {
-        const News_data = await get3stList();
-        console.log("News = ", News_data);
-        console.log(NewsJSON.text);
-    }
-    cron.schedule("*/1 * * * *", async () => {
-        console.log("running a task every two minutes");
-        await get3stAsync();
-    }); // end 3st
+    let getNewList = () => {
+        try {
+            console.log("get url run ...");
+            let keyWord=req.body.keyword;
+            let page=req.body.page;
+            var enc = encodeURI(keyWord);
+            let searchUrl="https://search.naver.com/search.naver?where=news&query="+enc+"&sm=tab_opt&sort=0&photo=0&field=0&pd=9&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so:r,p:1d,a:all&start="+page;
+            console.log( "[",keyWord,"] 3차 검색 결과중 ...");
 
-    const NewsJSON = fs.readFileSync("./newsList_3.json");
-    res.send(NewsJSON);
-}) //end 3st
+            return axios.get(searchUrl);
+        } catch (error) {
 
-router.post('/0', function (req, res) {
-    response = {
-        kewWord:req.body.keyWord
+            console.error(error);
+            }
     };
-    console.log(response);
-    res.end(JSON.stringify(response));
-})
+
+    getNewList()
+        .then(html => {
+            let ulList = [];
+            const $ = cheerio.load(html.data);
+            const $bodyList = $("ul.list_news").children("li")
+            $bodyList.each(function(i, elem) {
+            ulList[i] =
+                {
+                    title: $(this).find('.news_wrap .news_area a.news_tit').text(),
+                    url: $(this).find('.news_wrap .news_area a.news_tit').attr('href'),
+                    company : $(this).find('.news_wrap .news_area .news_info .info_group a').text(),
+                    sameNews :  $(this).find('a.news_more').text(),
+                };
+            })
+            const data = ulList.filter(n => n.title);
+            return data;
+        })
+        .then(response => {
+            const News = JSON.stringify(response)
+            res.send(News)
+        })
+}) //end 3st
 
 module.exports = router;
 

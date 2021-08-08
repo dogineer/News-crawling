@@ -3,16 +3,18 @@ const cheerio = require("cheerio");
 const fs = require("fs");
 
 let getNewList = async () => {
-try {
-    console.log("get url run ...");
-    let keyWord="korea";
-    let searchUrl="https://search.naver.com/search.naver?where=news&query="+keyWord+"&sm=tab_opt&sort=0&photo=0&field=0&pd=4&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3A1d&is_sug_officeid=0"
-    console.log( "[",keyWord,"] 1차 검색 결과중 ...");
-    
-    return await axios.get(searchUrl);
-} catch (error) {
-    console.error(error);
-    }
+    try {
+        console.log("get url run ...");
+        let keyWord=req.body.keyword;
+        var enc = encodeURI(keyWord);
+        let searchUrl="https://search.naver.com/search.naver?where=news&query="+enc+"&sm=tab_opt&sort=0&photo=0&field=0&pd=4&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3A1d&is_sug_officeid=0"
+        console.log( "[",keyWord,"] 1차 검색 결과중 ...");
+        
+        return await axios.get(searchUrl);
+    } catch (error) {
+
+        console.error(error);
+        }
 };
 
 const dataPath = "./newsList_1.json"

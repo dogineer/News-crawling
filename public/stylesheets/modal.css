@@ -1,0 +1,41 @@
+/* modal window */
+.modal {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s;
+    transition : opacity 0.5s;
+}
+
+.modal .bg {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.400);
+    transition : opacity 0.5s;
+}
+
+.modalBox {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 60vw;
+    height: 40vw;
+    padding: 1vw;
+}
+
+.modalBox .modal_dtn {
+    display: block;
+    width: 80px;
+    margin: 0 auto;
+    transition : opacity 0.5s;
+}
+
+.hidden {
+    display: none;
+}
+/* End modal window */
