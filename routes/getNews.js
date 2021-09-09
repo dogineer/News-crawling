@@ -39,6 +39,7 @@ router.post("/1",async(req,res)=> {
                     company : $(this).find('.news_wrap .news_area .news_info .info_group .press').text(),
                     sameNews :  $(this).find('a.news_more').text(),
                     sameNewsUrl :  $(this).find('a.news_more').attr('href'),
+                    time :  $(this).find('.news_wrap .news_area .news_info .info_group span.info').text(),
                 };
             })
             const data = ulList.filter(n => n.title);
@@ -72,9 +73,9 @@ router.post("/2",async(req,res)=> {
     };
 
     getNewList()
-        .then(html => {
+        .then(res => {
             let ulList = [];
-            const $ = cheerio.load(html.data);
+            const $ = cheerio.load(res.data);
             const $bodyList = $("ul.list_news").children("li")
             $bodyList.each(function(i, elem) {
             ulList[i] =
@@ -115,9 +116,9 @@ router.post("/3",async(req,res)=> {
     };
 
     getNewList()
-        .then(html => {
+        .then(res => {
             let ulList = [];
-            const $ = cheerio.load(html.data);
+            const $ = cheerio.load(res.data);
             const $bodyList = $("ul.list_news").children("li")
             $bodyList.each(function(i, elem) {
             ulList[i] =

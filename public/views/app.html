@@ -76,8 +76,12 @@
 
     <div class="Top_btn">
         <button class="Btn" onclick="Scroll_Top()">TOP</button><br/><br/>
-        <button class="M_Btn" onclick="modal()"> 문서 자동 </button><br/><br/>
-        <button class="Btn" onclick="onMenu()"> 검색 </button>
+        <button class="M_Btn" onclick="modal()"> 수첩 </button><br/><br/>
+        <button class="Btn" onclick="onMenu()"> 검색 </button><br/><br/>    
+        <button class="L_Btn" onclick="del_all()">수첩<br/>초기화</button><br/><br/>
+        ① 공단 및 방폐장</br><br/>
+        ② 재검토위 및<br/>사용후핵연료<br/><br/>
+        ③ 에너지전환 및<br/>원자력<br/><br/>
     </div>
 </center>    
 <!-- Modal window -->
@@ -85,25 +89,28 @@
     <div class="bg"></div>
     <div class="modalBox Btn_font_black">
         <button class="all_delete_btn" onclick="del_all()">전체삭제</button><br/><br/>
-            <div id="today"></div> <br/>
-            <div id="subject_1">
-                ① 공단 및 방폐장
-                <pre id="content_1"></pre>
+    <div id="textarea" contenteditable>
+                <div id="today"></div> <br/>
+                <div id="subject_1">
+                    ① 공단 및 방폐장
+                    <pre id="content_1">-해당없음-</pre>
+                </div>
+                <div id="subject_2">
+                    ② 재검토위 및 사용후핵연료
+                    <pre id="content_2">-해당없음-</pre>
+                </div>
+                <div id="subject_3">
+                    ③ 에너지전환 및 원자력
+                <pre id="content_3">-해당없음-</pre>
             </div>
-            <div id="subject_2">
-                ② 재검토위 및 사용후핵연료
-                <pre id="content_2"></pre>
-            </div>
-            <div id="subject_3">
-                ③ 에너지전환 및 원자력
-                <pre id="content_3"></pre>
         </div>
     </div>
 </div>
 <!-- End modal window -->
 
-<!-- viewTable -->
+
 <center>
+<!-- viewTable -->
 <table class="viewTable">
     <script>
         for(i=0; i<=9; i++){
@@ -116,7 +123,7 @@
             document.write("<tr>")
                 document.write("<th>언론사</th>")
                 document.write("<td id='company"+i+"'></td>")
-                document.write("<th><button class='st_num' id='1' type='button' value='"+i+"' onclick='add_content(this.id,"+i+")'>1</button><button class='st_num' id='2' type='button' value='url"+i+"' onclick='add_content(this.id,"+i+")'>2</button><button class='st_num' id='3' type='button' value='url"+i+"' onclick='add_content(this.id,"+i+")'>3</button></th>")
+                document.write("<th id='num"+i+"'><button class='st_num' id='1' name='b1' type='button' value='"+i+"' onclick='add_content(this.id,"+i+")'>①</button> <button class='st_num' id='2' type='button' value='url"+i+"' onclick='add_content(this.id,"+i+")'>②</button> <button class='st_num' id='3' type='button' value='url"+i+"' onclick='add_content(this.id,"+i+")'>③</button> </th>")
             document.write("</tr>")
 
             document.write("<tr>")
@@ -137,6 +144,11 @@
                 document.write("<td style='display:none' id='sameNewsUrl"+i+"'></td>")
                 document.write("<th><button class='link_btn' type='button' value='sameNewsUrl"+i+"' onclick='url_link(this.value)'>관련뉴스 바로가기</button></th>")
             document.write("</tr>")
+            
+            document.write("<tr>")
+                document.write("<th>시간</th>")
+                document.write("<td id='time"+i+"'></td>")
+            document.write("</tr>")
 
             document.write("<tr>")
                 document.write("<td class='br'><br></td>")
@@ -144,8 +156,8 @@
             }
     </script>
 </talbe>
-
-</center>
 <!-- End viewTable -->
+</center>
+
 </body>
 </html>

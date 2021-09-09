@@ -53,6 +53,10 @@ function modal() {
 /* ===== End Modal =====*/
 
 function add_content(id, i){
+
+    var box = document.getElementById("num"+i);
+        box.style.backgroundColor = "rgb(143, 253, 158)";
+
     const pre = document.createElement("pre");
     const content = document.getElementById("content_"+id);
     const title = document.getElementById("title"+i).innerHTML;
@@ -64,23 +68,32 @@ function add_content(id, i){
     const vola = document.getElementById("vola"+i+"_url").innerHTML;
 
     pre.setAttribute("id", "pre"+vola);
-    pre.textContent = title+" ("+company+") 외"+sameNews+'\n'+vola+'\n\n';
+    pre.textContent = title+" ("+company+" 외"+sameNews+")" + '\n'+vola+'\n\n';
     content.appendChild(pre);
 }
 
 function del_all(){
+    var box = document.getElementById("num");
+        box.style.backgroundColor = "royalblue";
+
     var reset = document.getElementById("content_1");
-        reset.innerHTML="";
+        reset.innerHTML="-해당없음-";
 
     var reset = document.getElementById("content_2");
-        reset.innerHTML="";
+        reset.innerHTML="-해당없음-";
 
     var reset = document.getElementById("content_3");
-        reset.innerHTML="";
+        reset.innerHTML="-해당없음-";
 }
 
 function del_content(i){
+    var box = document.getElementById("num"+i);
+        box.style.backgroundColor = "white";
+
     const vola = document.getElementById("vola"+i+"_url").innerHTML;
+
+    var box = document.getElementById();
+        box.style.backgroundColor = "royalblue";
 
     var reset = document.getElementById("pre"+vola);
         reset.remove();

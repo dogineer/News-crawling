@@ -1,7 +1,6 @@
 const getData = () => {
     onMenu()
     Scroll_Top()
-    
     var n = document.querySelector('input[name="time"]:checked').value
     var p = document.querySelector('input[id="page_num"]:checked').value
 
@@ -18,12 +17,13 @@ const getData = () => {
         reset.innerHTML="";
         var reset = document.getElementById("sameNewsUrl"+i);
         reset.innerHTML="";
+        var reset = document.getElementById("time"+i);
+        reset.innerHTML="";
     }
-
+    
     const word = document.getElementById("keyword").value;
 
-
-    fetch('/News/'+n, {
+    fetch('/getNews/'+n, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -48,10 +48,12 @@ const getData = () => {
             const News_sameNews    = document.getElementById("sameNews"+i);
             const News_vola        = document.getElementById("vola"+i+"_url");
             const News_sameNewsUrl = document.getElementById("sameNewsUrl"+i);
+            const News_time        = document.getElementById("time"+i);
 
             News_title.append(data[i].title);
             News_company.append(data[i].company);
             News_sameNews.append(data[i].sameNews);
+            News_time.append(data[i].time);
 
             News_url.append(data[i].url);
             News_vola.append("https://vo.la/q/?u="+data[i].url);
