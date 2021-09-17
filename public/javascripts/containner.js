@@ -41,7 +41,7 @@ function modal() {
 
     var n = document.querySelector('input[name="time"]:checked').value;
     if (n==1) {
-        today.append(month+"월 "+date+"일 "+d+"요일 KORAD 뉴스투데이");
+        today.append(month+"월 "+date+"일 "+d+"요일 뉴스투데이");
     }
     else if (n==2) {
         today.append(month+"월 "+date+"일 "+d+"요일 7시 40분 이후 14시 현재까지 실시간 언론 모니터링 현황입니다.");
@@ -73,8 +73,6 @@ function add_content(id, i){
 }
 
 function del_all(){
-    var box = document.getElementById("num");
-        box.style.backgroundColor = "royalblue";
 
     var reset = document.getElementById("content_1");
         reset.innerHTML="-해당없음-";
@@ -84,6 +82,8 @@ function del_all(){
 
     var reset = document.getElementById("content_3");
         reset.innerHTML="-해당없음-";
+
+    alert("삭제되었습니다.")
 }
 
 function del_content(i){
@@ -91,9 +91,6 @@ function del_content(i){
         box.style.backgroundColor = "white";
 
     const vola = document.getElementById("vola"+i+"_url").innerHTML;
-
-    var box = document.getElementById();
-        box.style.backgroundColor = "royalblue";
 
     var reset = document.getElementById("pre"+vola);
         reset.remove();
