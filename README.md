@@ -4,6 +4,7 @@
 ## :office:동작 화면
 <details markdown="1">
 <summary>OPEN</summary>
+![image](https://user-images.githubusercontent.com/61046271/133710266-6ce2a771-e5bc-4fcb-992d-fdfde65b743f.png)
 
 * **Home Page**
 
