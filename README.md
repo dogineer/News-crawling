@@ -4,9 +4,24 @@
 ## :office:동작 화면
 <details markdown="1">
 <summary>OPEN</summary>
-![image](https://user-images.githubusercontent.com/61046271/133710266-6ce2a771-e5bc-4fcb-992d-fdfde65b743f.png)
 
-* **Home Page**
+* **Terminal Page**
+<img src="https://user-images.githubusercontent.com/61046271/133710266-6ce2a771-e5bc-4fcb-992d-fdfde65b743f.png"/>
+
+* **Start Page**
+<img src="https://user-images.githubusercontent.com/61046271/133710739-f3623316-4c0f-453f-ae2c-74e2831df278.png"/>
+
+* **Search Page**
+* 검색 '그래픽카드'
+<img src="https://user-images.githubusercontent.com/61046271/133710877-5e0df5fd-d995-4074-b5af-d103f51429da.png"/>
+
+<img src="https://user-images.githubusercontent.com/61046271/133710937-db4504f2-ac7b-4b58-b70e-e40c31776e9c.png"/>
+
+<img src="https://user-images.githubusercontent.com/61046271/133711092-6feac7c4-1da9-47a3-81d4-85baff583e4e.png"/>
+
+* **Note Page**
+
+
 
 </details>
 
